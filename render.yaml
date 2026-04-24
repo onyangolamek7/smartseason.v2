@@ -1,19 +1,41 @@
-services:
-  - type: web
-    name: smartseason-api
-    env: php
-    buildCommand: "composer install --no-dev --optimize-autoloader && php artisan config:cache && php artisan route:cache && php artisan view:cache"
-    startCommand: "php artisan serve --host=0.0.0.0 --port=$PORT"
-    envVars:
-      - key: APP_ENV
-        value: production
-      - key: APP_KEY
-        generateValue: true
-      - key: APP_DEBUG
-        value: false
+#services:
+  #- type: web
+    #name: smartseason-api
+    #env: php
+    #buildCommand: "composer install --no-dev --optimize-autoloader && php artisan config:cache && php artisan route:cache && php artisan view:cache"
+    #startCommand: "php artisan serve --host=0.0.0.0 --port=$PORT"
+    #envVars:
+      #- key: APP_ENV
+        #value: production
+      #- key: APP_KEY
+        #generateValue: true
+      #- key: APP_DEBUG
+        #value: false
 
-  - type: web
-    name: smartseason-frontend
-    env: static
-    buildCommand: "npm install && npx vite build"
-    staticPublishPath: "dist"
+  #- type: web
+    #name: smartseason-frontend
+    #env: static
+    #buildCommand: "npm install && npx vite build"
+    #staticPublishPath: "dist"
+
+version: "1"
+projects:
+- name: My project
+  environments:
+  - name: Production
+    services:
+    - type: web
+      name: smartseason-frontend
+      runtime: static
+      repo: https://github.com/onyangolamek7/smartseason.v2
+      envVars:
+      - key: VITE_API_URL
+        sync: false
+      buildCommand: npm install; npx vite build
+      staticPublishPath: dist
+      routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+      autoDeployTrigger: commit
+      rootDir: frontend
