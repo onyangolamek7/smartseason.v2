@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'smartseason/field-monitoring',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '83c38f767c3851bd444d8b0aad3806e2ebd8bf32',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -978,9 +978,9 @@
             'dev_requirement' => true,
         ),
         'smartseason/field-monitoring' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '83c38f767c3851bd444d8b0aad3806e2ebd8bf32',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
