@@ -1,4 +1,4 @@
-# 🌾 SmartSeason — Field Monitoring System
+# SmartSeason — Field Monitoring System
 
 A full-stack web application for tracking crop progress across multiple fields during a growing season. Built with Laravel for the backend API and React for the frontend dashboard.
 
@@ -104,25 +104,6 @@ npm run build
 
 ---
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests
-5. Submit a pull request
-
----
-
-## License
-
-This project is licensed under the MIT License.
-| Field Agent | david@smartseason.com     | Agent@1234   |
-
-The seed data includes **12 fields** deliberately covering every status scenario so you can see all states immediately after setup.
-
----
-
 ## Field Status Logic
 
 Each field's status is **computed at runtime** (not stored) by `app/Models/Field.php → getStatusAttribute()`. This ensures status is always fresh and consistent with the latest data without needing background jobs.
@@ -143,13 +124,13 @@ Each field's status is **computed at runtime** (not stored) by `app/Models/Field
 Is is_abandoned = true?          → ABANDONED
 Is stage = harvested?            → COMPLETED
 
-── CRITICAL checks (checked first, highest priority) ──
+CRITICAL checks (checked first, highest priority)
 Expected harvest date is past?   → CRITICAL
 Ready stage, no update 14+ days  → CRITICAL (missed harvest window)
 No agent AND stage > planted     → CRITICAL (active crop, no oversight)
 Stuck in stage 2× max days       → CRITICAL
 
-── AT RISK checks ──
+AT RISK checks
 No agent assigned (any stage)    → AT RISK
 Stuck in stage > max days        → AT RISK
 Harvest within 7 days, not ready → AT RISK
