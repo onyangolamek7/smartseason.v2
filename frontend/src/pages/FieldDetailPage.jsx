@@ -157,7 +157,6 @@ export default function FieldDetailPage() {
             : field.days_to_harvest <= 7 ? 'bg-harvest-50 border border-harvest-200 text-harvest-700'
             : 'bg-blue-50 border border-blue-200 text-blue-700'
           }`}>
-            <span>📅</span>
             <span>Expected harvest: <strong>{field.expected_harvest_date}</strong></span>
             <span className="ml-auto text-xs font-semibold">
               {field.days_to_harvest < 0 ? `${Math.abs(field.days_to_harvest)} days overdue` : `${field.days_to_harvest} days away`}
@@ -220,7 +219,7 @@ export default function FieldDetailPage() {
               </FormField>
 
               <button type="submit" className="btn-primary w-full justify-center" disabled={updateLoading}>
-                {updateLoading ? <Spinner size="sm" /> : '📝 Submit Update'}
+                {updateLoading ? <Spinner size="sm" /> : 'Submit Update'}
               </button>
             </form>
           </div>

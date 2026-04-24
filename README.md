@@ -1,8 +1,19 @@
 # 🌾 SmartSeason — Field Monitoring System
 
-A full-stack web application for tracking crop progress across multiple fields during a growing season.
+A full-stack web application for tracking crop progress across multiple fields during a growing season. Built with Laravel for the backend API and React for the frontend dashboard.
 
 **Stack:** Laravel 11 · React 18 · MySQL · Laravel Sanctum · Tailwind CSS · Recharts
+
+---
+
+## Features
+
+- **Field Management**: Create and monitor multiple fields with crop details
+- **Progress Tracking**: Record and visualize field updates over time
+- **User Roles**: Admin and Field Agent roles with appropriate permissions
+- **Authentication**: Secure login using Laravel Sanctum
+- **Dashboard**: Interactive charts and data visualization with Recharts
+- **Responsive Design**: Mobile-friendly UI with Tailwind CSS
 
 ---
 
@@ -14,29 +25,29 @@ A full-stack web application for tracking crop progress across multiple fields d
 - Node.js 18+
 - MySQL 8+
 
-### 1. Database
+### 1. Database Setup
 ```bash
 mysql -u root -p -e "CREATE DATABASE smartseason CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 ```
 
-### 2. Backend
+### 2. Backend Setup
 ```bash
 cd backend
 composer install
 cp .env.example .env
-# Edit .env — set DB_USERNAME, DB_PASSWORD
+# Edit .env — configure database credentials and app settings
 php artisan key:generate
 php artisan migrate --seed
 php artisan serve
-# → http://localhost:8000
+# → Backend API running at http://localhost:8000
 ```
 
-### 3. Frontend
+### 3. Frontend Setup
 ```bash
 cd frontend
 npm install
 npm run dev
-# → http://localhost:5173
+# → Frontend app running at http://localhost:5173
 ```
 
 ---
@@ -48,6 +59,64 @@ npm run dev
 | Admin       | admin@smartseason.com     | Admin@1234   |
 | Field Agent | james@smartseason.com     | Agent@1234   |
 | Field Agent | grace@smartseason.com     | Agent@1234   |
+
+---
+
+## API Endpoints
+
+### Authentication
+- `POST /api/login` - User login
+- `POST /api/logout` - User logout
+
+### Fields
+- `GET /api/fields` - List all fields
+- `POST /api/fields` - Create a new field
+- `GET /api/fields/{id}` - Get field details
+- `PUT /api/fields/{id}` - Update field
+- `DELETE /api/fields/{id}` - Delete field
+
+### Field Updates
+- `GET /api/field-updates` - List all updates
+- `POST /api/field-updates` - Create a new update
+- `GET /api/field-updates/{id}` - Get update details
+
+---
+
+## Development
+
+### Running Tests
+```bash
+cd backend
+php artisan test
+```
+
+### Building for Production
+```bash
+# Backend
+cd backend
+php artisan config:cache
+php artisan route:cache
+
+# Frontend
+cd frontend
+npm run build
+```
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests
+5. Submit a pull request
+
+---
+
+## License
+
+This project is licensed under the MIT License.
 | Field Agent | david@smartseason.com     | Agent@1234   |
 
 The seed data includes **12 fields** deliberately covering every status scenario so you can see all states immediately after setup.
@@ -228,3 +297,20 @@ smartseason/
 6. **`expected_harvest_date`** — Drives proactive at-risk and critical detection before the harvest window is missed.
 7. **Token auth** — Sanctum tokens over cookie sessions; simpler for a React SPA, tokens stored in localStorage (acceptable for this scope).
 8. **Soft cascade on agent delete** — Deleting an agent nullifies `assigned_agent_id` on their fields (nullOnDelete) rather than cascading deletions.
+
+---
+
+## Assumptions Made
+
+1. **Single-organization system** — The app manages fields for one organization; there is no multi-tenant isolation.
+2. **Crop stages are predefined** — The 7 crop stages (Planted → Harvested) are fixed and apply to all field types; stages cannot be customized per crop.
+3. **Field ownership is immutable** — Once a field is created, its crop type and location are fixed and cannot be changed (only updated via delete/recreate).
+4. **Agents can only advance stages** — Field stage progression is forward-only; agents cannot revert a field to an earlier stage (prevents data integrity issues).
+5. **Expected harvest date is mandatory** — Every field must have an `expected_harvest_date` to enable at-risk/critical detection; null dates are not allowed.
+6. **Token expiry is 8 hours** — Sanctum tokens expire after 8 hours; users must log back in after this period (no refresh token mechanism implemented).
+7. **Tokens stored in localStorage** — Frontend stores Sanctum tokens in browser localStorage (acceptable for internal agricultural tools, not public-facing systems).
+8. **No background jobs for status updates** — Status is computed on-demand; the app assumes request load is reasonable and doesn't require async status caching.
+9. **Agent workload is unlimited** — There are no constraints on how many fields can be assigned to a single agent; workload balancing is manual.
+10. **Soft deletes not implemented** — Deleting users, fields, or updates performs hard deletion; deleted data cannot be recovered (appropriate for development; consider soft deletes for production).
+11. **Single timezone** — The app assumes all timestamps are in UTC; no per-user timezone configuration is implemented.
+12. **Stateless API** — The backend maintains no session state; all state is in the database (necessary for scalability but means login/logout cannot be truly session-based).

@@ -1,6 +1,6 @@
 import Spinner from './Spinner'
 
-// ── Status Badge ──────────────────────────────────────────────────────────────
+//Status Badge
 export function StatusBadge({ status }) {
   const cfg = {
     active:    { cls: 'badge-active',    dot: 'bg-crop-500',     label: 'Active'    },
@@ -18,7 +18,7 @@ export function StatusBadge({ status }) {
   )
 }
 
-// ── Stage Badge ───────────────────────────────────────────────────────────────
+//Stage Badge
 export function StageBadge({ stage }) {
   const labels = {
     planted: 'Planted', germinated: 'Germinated', growing: 'Growing',
@@ -27,7 +27,7 @@ export function StageBadge({ stage }) {
   return <span className={`stage-${stage}`}>{labels[stage] ?? stage}</span>
 }
 
-// ── Alert ─────────────────────────────────────────────────────────────────────
+//Alert
 export function Alert({ type = 'error', message, onClose }) {
   if (!message) return null
   const styles = {
@@ -44,7 +44,7 @@ export function Alert({ type = 'error', message, onClose }) {
   )
 }
 
-// ── Modal ─────────────────────────────────────────────────────────────────────
+//Modal
 export function Modal({ open, onClose, title, children, size = 'md' }) {
   if (!open) return null
   const widths = { sm: 'max-w-sm', md: 'max-w-lg', lg: 'max-w-2xl', xl: 'max-w-4xl' }
@@ -64,7 +64,7 @@ export function Modal({ open, onClose, title, children, size = 'md' }) {
   )
 }
 
-// ── Confirm Dialog ────────────────────────────────────────────────────────────
+//Confirm Dialog
 export function ConfirmDialog({ open, onClose, onConfirm, title, message, loading, confirmLabel = 'Delete', confirmClass = 'btn-danger' }) {
   return (
     <Modal open={open} onClose={onClose} title={title} size="sm">
@@ -79,7 +79,7 @@ export function ConfirmDialog({ open, onClose, onConfirm, title, message, loadin
   )
 }
 
-// ── Empty State ───────────────────────────────────────────────────────────────
+//Empty State
 export function EmptyState({ icon, title, description, action }) {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
@@ -91,7 +91,7 @@ export function EmptyState({ icon, title, description, action }) {
   )
 }
 
-// ── Page Header ───────────────────────────────────────────────────────────────
+//Page Header
 export function PageHeader({ title, subtitle, action }) {
   return (
     <div className="flex items-start justify-between mb-6 gap-4">
@@ -104,7 +104,7 @@ export function PageHeader({ title, subtitle, action }) {
   )
 }
 
-// ── Stat Card ─────────────────────────────────────────────────────────────────
+//Stat Card
 export function StatCard({ label, value, icon, colorClass = 'bg-soil-50 text-soil-600', sub, pulse }) {
   return (
     <div className={`card flex items-center gap-4 ${pulse ? 'ring-2 ring-red-300 ring-offset-1' : ''}`}>
@@ -122,7 +122,7 @@ export function StatCard({ label, value, icon, colorClass = 'bg-soil-50 text-soi
   )
 }
 
-// ── Form Field ────────────────────────────────────────────────────────────────
+//Form Field
 export function FormField({ label, error, children, required, hint }) {
   return (
     <div>
@@ -136,7 +136,7 @@ export function FormField({ label, error, children, required, hint }) {
   )
 }
 
-// ── Health Score Bar ──────────────────────────────────────────────────────────
+//Health Score Bar
 export function HealthBar({ score }) {
   if (!score) return <span className="text-stone-300 text-xs">—</span>
   const pct = (score / 10) * 100
@@ -151,7 +151,7 @@ export function HealthBar({ score }) {
   )
 }
 
-// ── Status Reason Tooltip ─────────────────────────────────────────────────────
+//Status Reason Tooltip
 export function StatusReason({ status, reason }) {
   if (!reason || status === 'active' || status === 'completed') return null
   const colors = {

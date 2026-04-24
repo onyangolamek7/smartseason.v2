@@ -19,7 +19,7 @@ function Counter({ to, suffix = '', duration = 1800 }) {
   return <>{val.toLocaleString()}{suffix}</>
 }
 
-/* ── Feature card ──────────────────────────────────────────────────────────── */
+/*Feature card */
 function FeatureCard({ icon, title, desc, delay }) {
   return (
     <div
@@ -33,7 +33,7 @@ function FeatureCard({ icon, title, desc, delay }) {
   )
 }
 
-/* ── Stage pill ─────────────────────────────────────────────────────────────── */
+/*Stage pill */
 function StagePill({ emoji, label, active }) {
   return (
     <div className={`stage-pill ${active ? 'stage-pill-active' : ''}`}>
@@ -43,7 +43,7 @@ function StagePill({ emoji, label, active }) {
   )
 }
 
-/* ── Role card ──────────────────────────────────────────────────────────────── */
+/*Role card */
 function RoleCard({ icon, role, email, password, desc, onFill }) {
   return (
     <div className="role-card" onClick={onFill}>
@@ -58,7 +58,7 @@ function RoleCard({ icon, role, email, password, desc, onFill }) {
   )
 }
 
-/* ── Main ───────────────────────────────────────────────────────────────────── */
+/*Main  */
 export default function LandingPage() {
   const navigate = useNavigate()
   const [activePill, setActivePill] = useState(0)
@@ -74,13 +74,13 @@ export default function LandingPage() {
   }
 
   const stages = [
-    { emoji: '🌱', label: 'Planted' },
-    { emoji: '🌿', label: 'Germinated' },
-    { emoji: '🌾', label: 'Growing' },
-    { emoji: '🌸', label: 'Flowering' },
-    { emoji: '🍃', label: 'Maturing' },
-    { emoji: '✅', label: 'Ready' },
-    { emoji: '🏆', label: 'Harvested' },
+    { label: 'Planted' },
+    { label: 'Germinated' },
+    { label: 'Growing' },
+    { label: 'Flowering' },
+    { label: 'Maturing' },
+    { label: 'Ready' },
+    { label: 'Harvested' },
   ]
 
   return (
@@ -116,7 +116,7 @@ export default function LandingPage() {
 
         body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--soil-50); color: var(--stone-800); -webkit-font-smoothing: antialiased; }
 
-        /* ── NAV ─────────────────────────────────────────────── */
+        /*NAV */
         .nav {
           position: sticky; top: 0; z-index: 50;
           display: flex; align-items: center; justify-content: space-between;
@@ -148,7 +148,7 @@ export default function LandingPage() {
         }
         .btn-solid:hover { background: var(--soil-800); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(82,44,18,0.25); }
 
-        /* ── HERO ─────────────────────────────────────────────── */
+        /*HERO */
         .hero {
           min-height: calc(100vh - 64px);
           display: grid; grid-template-columns: 1fr 1fr;
@@ -209,7 +209,7 @@ export default function LandingPage() {
         .stat-num { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; color: var(--soil-800); line-height: 1; }
         .stat-label { font-size: 0.78rem; color: var(--stone-400); margin-top: 4px; font-weight: 500; }
 
-        /* ── HERO VISUAL ─────────────────────────────────────── */
+        /* HERO VISUAL */
         .hero-visual {
           display: flex; justify-content: center; align-items: center;
           padding: 3rem 0 3rem 2rem;
@@ -254,7 +254,7 @@ export default function LandingPage() {
         .alert-name { font-weight: 600; color: var(--stone-800); flex: 1; }
         .alert-badge { padding: 2px 7px; border-radius: 100px; font-size: 0.6rem; font-weight: 600; }
 
-        /* ── STAGES STRIP ─────────────────────────────────────── */
+        /*STAGES STRIP*/
         .stages-strip {
           background: var(--soil-800); padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
         }
@@ -274,7 +274,7 @@ export default function LandingPage() {
         }
         .stages-connector { color: var(--soil-600); font-size: 0.7rem; display: flex; align-items: center; }
 
-        /* ── FEATURES ─────────────────────────────────────────── */
+        /*FEATURES */
         .features-section {
           padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
           max-width: 1280px; margin: 0 auto;
@@ -293,7 +293,7 @@ export default function LandingPage() {
         .feature-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--soil-800); margin-bottom: 0.5rem; }
         .feature-desc { font-size: 0.875rem; color: var(--stone-600); line-height: 1.65; }
 
-        /* ── STATUS SECTION ───────────────────────────────────── */
+        /*STATUS SECTION*/
         .status-section {
           background: var(--soil-50); border-top: 1px solid var(--soil-200); border-bottom: 1px solid var(--soil-200);
           padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
@@ -317,7 +317,7 @@ export default function LandingPage() {
         .status-name { font-weight: 600; font-size: 0.9rem; color: var(--stone-800); margin-bottom: 3px; }
         .status-desc { font-size: 0.8rem; color: var(--stone-600); line-height: 1.5; }
 
-        /* ── DEMO SECTION ─────────────────────────────────────── */
+        /*DEMO SECTION*/
         .demo-section {
           padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
           max-width: 1280px; margin: 0 auto;
@@ -338,7 +338,7 @@ export default function LandingPage() {
         .role-arrow { color: var(--soil-400); font-size: 1rem; flex-shrink: 0; transition: transform 0.15s; }
         .role-card:hover .role-arrow { transform: translateX(3px); color: var(--soil-700); }
 
-        /* ── API REFERENCE STRIP ──────────────────────────────── */
+        /*API REFERENCE STRIP*/
         .api-strip {
           background: var(--stone-800); padding: 2rem clamp(1.5rem, 5vw, 4rem);
         }
@@ -357,7 +357,7 @@ export default function LandingPage() {
         .method-put    { background: rgba(96,165,250,0.2); color: #93c5fd; }
         .method-delete { background: rgba(248,113,113,0.2);color: #f87171; }
 
-        /* ── FOOTER ───────────────────────────────────────────── */
+        /*FOOTER*/
         .footer {
           background: var(--soil-800); padding: 2rem clamp(1.5rem, 5vw, 4rem);
           display: flex; align-items: center; justify-content: space-between; flex-wrap: gap;
@@ -498,7 +498,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── STAGES STRIP ─────────────────────────────────────────────────────── */}
+      {/*STAGES STRIP*/}
       <div className="stages-strip">
         <div className="stages-inner">
           <div className="stages-label">7-Stage Crop Lifecycle Tracking</div>
@@ -542,11 +542,11 @@ export default function LandingPage() {
           </div>
           <div className="status-cards">
             {[
-              { key: 'active',    emoji: '✅', name: 'Active',    desc: 'Progressing normally within all expected timelines. No action required.' },
-              { key: 'at_risk',   emoji: '⚠️', name: 'At Risk',   desc: 'Early warning — harvest approaching, stage overdue, or no agent assigned. Action recommended soon.' },
-              { key: 'critical',  emoji: '🚨', name: 'Critical',  desc: 'Urgent intervention required — overdue harvest, missed harvest window, or no oversight on active crop.' },
-              { key: 'completed', emoji: '🏆', name: 'Completed', desc: 'Stage has reached Harvested. Terminal state — the season is done for this field.' },
-              { key: 'abandoned', emoji: '🚫', name: 'Abandoned', desc: 'Admin explicitly marked field as abandoned. Excluded from active monitoring and alerts.' },
+              { key: 'active',    name: 'Active',    desc: 'Progressing normally within all expected timelines. No action required.' },
+              { key: 'at_risk',   name: 'At Risk',   desc: 'Early warning — harvest approaching, stage overdue, or no agent assigned. Action recommended soon.' },
+              { key: 'critical',  name: 'Critical',  desc: 'Urgent intervention required — overdue harvest, missed harvest window, or no oversight on active crop.' },
+              { key: 'completed', name: 'Completed', desc: 'Stage has reached Harvested. Terminal state — the season is done for this field.' },
+              { key: 'abandoned', name: 'Abandoned', desc: 'Admin explicitly marked field as abandoned. Excluded from active monitoring and alerts.' },
             ].map(s => (
               <div className={`status-row ${s.key}`} key={s.key}>
                 <div className="status-emoji">{s.emoji}</div>
@@ -560,32 +560,32 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* ── DEMO ACCOUNTS ────────────────────────────────────────────────────── */}
+      {/*DEMO ACCOUNTS*/}
       <section className="demo-section" id="demo-section">
         <div className="section-eyebrow">Try it now</div>
         <h2 className="section-h2">Four demo accounts, ready to log in</h2>
         <p className="section-sub">Click any account below to go straight to the login page with credentials pre-filled. Explore the admin view, then switch to an agent to see the role-scoped experience.</p>
         <div className="roles-grid">
           <RoleCard
-            icon="🔐" role="Sarah Kimani — Admin"
+            role="Sarah Kimani — Admin"
             email="admin@smartseason.com" password="Admin@1234"
             desc="Full access: all fields, all agents, user management, and global dashboard with charts."
             onFill={() => goToLogin('admin@smartseason.com')}
           />
           <RoleCard
-            icon="👤" role="James Odhiambo — Field Agent"
+            role="James Odhiambo — Field Agent"
             email="james@smartseason.com" password="Agent@1234"
             desc="Sees 4 assigned fields — Rift Valley blocks and North Rift. Can submit stage updates."
             onFill={() => goToLogin('james@smartseason.com')}
           />
           <RoleCard
-            icon="👤" role="Grace Wanjiku — Field Agent"
+            role="Grace Wanjiku — Field Agent"
             email="grace@smartseason.com" password="Agent@1234"
             desc="Manages Central Highlands plots and Nyanza sugarcane. Has a critical overdue field."
             onFill={() => goToLogin('grace@smartseason.com')}
           />
           <RoleCard
-            icon="👤" role="David Mwangi — Field Agent"
+            role="David Mwangi — Field Agent"
             email="david@smartseason.com" password="Agent@1234"
             desc="Handles Nyanza rice (at risk), Coast cassava, and Western sunflower farm."
             onFill={() => goToLogin('david@smartseason.com')}
@@ -593,52 +593,14 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── API STRIP ────────────────────────────────────────────────────────── */}
-      <div className="api-strip">
-        <div className="api-inner">
-          <div className="api-label">REST API — Base URL: http://localhost:8000/api</div>
-          <div className="api-chips">
-            {[
-              { m:'POST', p:'/auth/login' },
-              { m:'GET',  p:'/auth/me' },
-              { m:'GET',  p:'/dashboard' },
-              { m:'GET',  p:'/fields' },
-              { m:'POST', p:'/fields' },
-              { m:'GET',  p:'/fields/{id}' },
-              { m:'PUT',  p:'/fields/{id}' },
-              { m:'DELETE',p:'/fields/{id}' },
-              { m:'POST', p:'/fields/{id}/abandon' },
-              { m:'POST', p:'/fields/{id}/restore' },
-              { m:'GET',  p:'/fields/{id}/updates' },
-              { m:'POST', p:'/fields/{id}/updates' },
-              { m:'GET',  p:'/agents' },
-              { m:'GET',  p:'/users' },
-              { m:'POST', p:'/users' },
-              { m:'PUT',  p:'/users/{id}' },
-              { m:'DELETE',p:'/users/{id}' },
-            ].map(e => (
-              <div key={e.p+e.m} className="api-chip">
-                <span className={`method method-${e.m.toLowerCase()}`}>{e.m}</span>
-                <span>{e.p}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── FOOTER ───────────────────────────────────────────────────────────── */}
+      {/*FOOTER*/}
       <footer className="footer">
         <div className="footer-logo">
           <div className="nav-logo-icon" style={{ width: 28, height: 28, fontSize: 14 }}>🌿</div>
           <div>
             <div className="footer-name">SmartSeason</div>
-            <div className="footer-copy">© {new Date().getFullYear()} Field Monitoring System</div>
+            <div className="footer-copy">© {new Date().getFullYear()} Field Monitoring System. Developed by <h4><b>Lamek</b></h4></div>
           </div>
-        </div>
-        <div className="footer-stack">
-          {['Laravel 11', 'React 18', 'MySQL 8', 'Sanctum', 'Vite', 'Tailwind CSS', 'Recharts'].map(t => (
-            <span key={t} className="stack-badge">{t}</span>
-          ))}
         </div>
       </footer>
     </>

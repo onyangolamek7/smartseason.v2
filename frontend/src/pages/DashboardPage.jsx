@@ -3,12 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { dashboardApi } from '../api/services'
 import { StatCard, StageBadge, StatusBadge, StatusReason, Spinner, PageHeader } from '../components/ui/index'
-import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend, LineChart, Line
-} from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend, LineChart, Line } from 'recharts'
 
-/* ── helpers ──────────────────────────────────────────────────────────────── */
+/*helpers*/
 function timeAgo(d) {
   if (!d) return '—'
   const s = Math.floor((Date.now() - new Date(d)) / 1000)
@@ -25,7 +22,7 @@ function greeting() {
 const STAGE_COLORS  = { planted:'#f59e0b', germinated:'#84cc16', growing:'#22c55e', flowering:'#ec4899', maturing:'#f97316', ready:'#3b82f6', harvested:'#78716c' }
 const STATUS_COLORS = { active:'#16a34a', at_risk:'#f59e0b', critical:'#ef4444', completed:'#78716c', abandoned:'#a8a29e' }
 
-/* ── sub-components ───────────────────────────────────────────────────────── */
+/*sub-components*/
 function SectionTitle({ children, sub }) {
   return (
     <div className="mb-4">
@@ -72,7 +69,7 @@ function HarvestCard({ field, onClick }) {
   )
 }
 
-/* ── main component ───────────────────────────────────────────────────────── */
+/*main component*/
 export default function DashboardPage() {
   const { user }              = useAuth()
   const navigate              = useNavigate()
@@ -116,50 +113,48 @@ export default function DashboardPage() {
     <div className="animate-fadeIn space-y-6">
       {/* Header */}
       <PageHeader
-        title={`Good ${greeting()}, ${user?.name?.split(' ')[0]} 👋`}
+        title={`Good ${greeting()}, ${user?.name?.split(' ')[0]}`}
         subtitle={isAdmin ? 'Season overview across all fields and agents.' : 'Overview of your assigned fields.'}
       />
 
-      {/* ── Alerts strip (critical/at-risk) ─────────────────────────────── */}
+      {/*Alerts strip (critical/at-risk)*/}
       {(data.alert_fields?.length > 0 || data.needs_action?.length > 0) && (() => {
         const alerts = isAdmin ? data.alert_fields : data.needs_action
         const criticals = alerts.filter(f => f.status === 'critical')
         return criticals.length > 0 ? (
-          <div className="flex items-center gap-3 px-4 py-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700 animate-pulse-soft">
-            <span className="text-lg">🚨</span>
-            <strong>{criticals.length} critical field{criticals.length > 1 ? 's' : ''}</strong> require immediate attention.
+          <div className="flex items-center gap-3 px-4 py-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700 animate-pulse-soft">            <strong>{criticals.length} critical field{criticals.length > 1 ? 's' : ''}</strong> require immediate attention.
             <button className="ml-auto text-xs underline" onClick={() => document.getElementById('alerts-section')?.scrollIntoView({ behavior: 'smooth' })}>View below</button>
           </div>
         ) : null
       })()}
 
-      {/* ── KPI cards ────────────────────────────────────────────────────── */}
+      {/*KPI cards*/}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <StatCard label="Total Fields"    value={data.summary.total_fields}    icon="🌾" colorClass="bg-soil-50 text-soil-600" />
-        <StatCard label="Active"          value={data.summary.active_fields}   icon="✅" colorClass="bg-crop-50 text-crop-600" />
-        <StatCard label="At Risk"         value={data.summary.at_risk_fields}  icon="⚠️" colorClass="bg-harvest-50 text-harvest-600" />
-        <StatCard label="Critical"        value={data.summary.critical_fields} icon="🚨" colorClass="bg-red-50 text-red-600" pulse={data.summary.critical_fields > 0} />
+        <StatCard label="Total Fields"    value={data.summary.total_fields} colorClass="bg-soil-50 text-soil-600" />
+        <StatCard label="Active"          value={data.summary.active_fields} colorClass="bg-crop-50 text-crop-600" />
+        <StatCard label="At Risk"         value={data.summary.at_risk_fields} colorClass="bg-harvest-50 text-harvest-600" />
+        <StatCard label="Critical"        value={data.summary.critical_fields} colorClass="bg-red-50 text-red-600" pulse={data.summary.critical_fields > 0} />
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {isAdmin ? (
           <>
-            <StatCard label="Field Agents"     value={data.summary.total_agents}       icon="👤" colorClass="bg-blue-50 text-blue-600" />
-            <StatCard label="Unassigned"        value={data.summary.unassigned_fields}  icon="📍" colorClass="bg-stone-100 text-stone-500" />
-            <StatCard label="Upcoming Harvests" value={data.summary.upcoming_harvests}  icon="🌾" colorClass="bg-purple-50 text-purple-600" sub="next 14 days" />
-            <StatCard label="Total Area"        value={`${data.summary.total_area_ha} ha`} icon="📐" colorClass="bg-teal-50 text-teal-600" />
+            <StatCard label="Field Agents"     value={data.summary.total_agents} colorClass="bg-blue-50 text-blue-600" />
+            <StatCard label="Unassigned"        value={data.summary.unassigned_fields} colorClass="bg-stone-100 text-stone-500" />
+            <StatCard label="Upcoming Harvests" value={data.summary.upcoming_harvests} colorClass="bg-purple-50 text-purple-600" sub="next 14 days" />
+            <StatCard label="Total Area"        value={`${data.summary.total_area_ha} ha`} colorClass="bg-teal-50 text-teal-600" />
           </>
         ) : (
           <>
-            <StatCard label="Ready to Harvest" value={data.summary.ready_to_harvest}   icon="✂️" colorClass="bg-blue-50 text-blue-600" />
-            <StatCard label="Completed"         value={data.summary.completed_fields}  icon="🏆" colorClass="bg-stone-100 text-stone-500" />
-            <StatCard label="Upcoming Harvests" value={data.summary.upcoming_harvests} icon="📅" colorClass="bg-purple-50 text-purple-600" sub="next 14 days" />
-            <StatCard label="Total Area"        value={`${data.summary.total_area_ha} ha`} icon="📐" colorClass="bg-teal-50 text-teal-600" />
+            <StatCard label="Ready to Harvest" value={data.summary.ready_to_harvest} colorClass="bg-blue-50 text-blue-600" />
+            <StatCard label="Completed"         value={data.summary.completed_fields} colorClass="bg-stone-100 text-stone-500" />
+            <StatCard label="Upcoming Harvests" value={data.summary.upcoming_harvests} colorClass="bg-purple-50 text-purple-600" sub="next 14 days" />
+            <StatCard label="Total Area"        value={`${data.summary.total_area_ha} ha`} colorClass="bg-teal-50 text-teal-600" />
           </>
         )}
       </div>
 
-      {/* ── Charts row ───────────────────────────────────────────────────── */}
+      {/*Charts row*/}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {/* Stage donut */}
         <div className="card">
@@ -220,7 +215,7 @@ export default function DashboardPage() {
         )}
       </div>
 
-      {/* ── Main content area ─────────────────────────────────────────────── */}
+      {/*Main content area*/}
       <div className={`grid gap-5 ${isAdmin ? 'lg:grid-cols-3' : 'lg:grid-cols-2'}`}>
 
         {/* Alerts section */}
@@ -238,7 +233,6 @@ export default function DashboardPage() {
               </div>
             ) : (
               <div className="card text-center py-8">
-                <p className="text-3xl mb-2">🎉</p>
                 <p className="text-sm text-stone-500">All fields are in good shape!</p>
               </div>
             )
@@ -293,7 +287,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* ── Recent activity ───────────────────────────────────────────────── */}
+      {/*Recent activity*/}
       <div>
         <SectionTitle>Recent Activity</SectionTitle>
         {data.recent_updates?.length > 0 ? (

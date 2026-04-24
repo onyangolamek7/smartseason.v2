@@ -37,7 +37,7 @@ class Field extends Model
         ];
     }
 
-    // ─── Relationships ───────────────────────────────────────────────────────
+    //Relationships
 
     public function assignedAgent(): BelongsTo
     {
@@ -54,7 +54,7 @@ class Field extends Model
         return $this->hasOne(FieldUpdate::class)->latestOfMany();
     }
 
-    // ─── Computed Status ─────────────────────────────────────────────────────
+    //Computed Status
 
     public function getStatusAttribute(): FieldStatus
     {

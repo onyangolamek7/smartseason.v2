@@ -156,7 +156,7 @@ export default function FieldsPage() {
           <button className="btn-primary" onClick={load}>Retry</button>
         </div>
       ) : filtered.length === 0 ? (
-        <EmptyState icon="🌾" title="No fields found"
+        <EmptyState title="No fields found"
           description={isAdmin ? 'Add your first field to get started.' : 'You have no assigned fields matching these filters.'}
           action={isAdmin && <button className="btn-primary" onClick={() => setCreateOpen(true)}>Add Field</button>}
         />

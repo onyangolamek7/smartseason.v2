@@ -62,13 +62,13 @@ export default function LoginPage() {
           {/* Stage flow */}
           <div className="mt-6 flex flex-col gap-2">
             {[
-              { emoji: '🌱', label: 'Planted',    desc: 'Seeds in ground'       },
-              { emoji: '🌿', label: 'Germinated', desc: 'Seedlings emerging'    },
-              { emoji: '🌾', label: 'Growing',    desc: 'Active growth phase'   },
-              { emoji: '🌸', label: 'Flowering',  desc: 'Pollination stage'     },
-              { emoji: '🍃', label: 'Maturing',   desc: 'Crop filling & drying' },
-              { emoji: '✅', label: 'Ready',      desc: 'Harvest window open'   },
-              { emoji: '🏆', label: 'Harvested',  desc: 'Season complete'       },
+              { label: 'Planted',    desc: 'Seeds in ground'       },
+              { label: 'Germinated', desc: 'Seedlings emerging'    },
+              { label: 'Growing',    desc: 'Active growth phase'   },
+              { label: 'Flowering',  desc: 'Pollination stage'     },
+              { label: 'Maturing',   desc: 'Crop filling & drying' },
+              { label: 'Ready',      desc: 'Harvest window open'   },
+              { label: 'Harvested',  desc: 'Season complete'       },
             ].map((s, i) => (
               <div key={s.label} className="flex items-center gap-3">
                 <div className="flex flex-col items-center">
@@ -135,10 +135,10 @@ export default function LoginPage() {
             <p className="text-xs font-semibold text-stone-600 mb-3">Demo Accounts — click to fill</p>
             <div className="space-y-2">
               {[
-                { label: '🔐 Admin',       email: 'admin@smartseason.com' },
-                { label: '👤 James (Agent)', email: 'james@smartseason.com' },
-                { label: '👤 Grace (Agent)', email: 'grace@smartseason.com' },
-                { label: '👤 David (Agent)', email: 'david@smartseason.com' },
+                { label: 'Admin',       email: 'admin@smartseason.com' },
+                { label: 'James (Agent)', email: 'james@smartseason.com' },
+                { label: 'Grace (Agent)', email: 'grace@smartseason.com' },
+                { label: 'David (Agent)', email: 'david@smartseason.com' },
               ].map(a => (
                 <button key={a.email} type="button" onClick={() => fill(a.email)}
                   className="w-full text-left px-3 py-2 rounded-lg bg-white border border-stone-200 hover:border-soil-300 hover:bg-soil-50 transition-colors">
